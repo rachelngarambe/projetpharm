@@ -1,0 +1,35 @@
+{
+  "name": "projetpharm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "bcrypt-nodejs": "^0.0.3",
+    "body-parser": "^1.19.0",
+    "connect-flash": "^0.1.1",
+    "ejs": "^2.6.2",
+    "express-handlebars": "^3.1.0",
+    "express-flash": "^0.0.2",
+    "express-session": "^1.16.2",
+    "memory": "^0.0.3",
+    "multer": "^1.4.2",
+    "mysql": "^2.17.1",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "util.promisify": "^1.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rachelngarambe/projetpharm.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rachelngarambe/projetpharm/issues"
+  },
+  "homepage": "https://github.com/rachelngarambe/projetpharm#readme"
+}

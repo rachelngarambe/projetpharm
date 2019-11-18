@@ -1,0 +1,71 @@
+<%- include('../layouts/header'); -%>
+
+<div class="row mt-5">
+        <div class="col-md-6 m-auto">
+            <div class="card card-body">
+                <h1 class="text-center mb-3"><i class="fas fa-envelope"></i> Contact us</h1>
+                
+                <form action="/contact" method="POST">
+                    <div class="for-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" class="form-control" placeholder="Full Name"
+                         value="<%= typeof email != 'undefined' ? email : '' %>">
+                    </div>
+                    <div class="for-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email"
+                         value="<%= typeof email != 'undefined' ? email : '' %>">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleFormControlTextarea1">Your mail</label>
+                      <textarea class="form-control" id="content" name="content" rows="3"></textarea>
+                    </div>
+                    <div class="for-group">     
+                        <button type="submit" class="btn btn-info btn-block">Send</button>
+                    </div>
+                </form>
+                <p class="lead mt-4">
+                    Our phone number, for call <br>
+                    <i class="fas fa-phone-square"></i> +250 78.. <br>
+                    <i class="fas fa-envelope-open-text"></i> info@my_pharmacy.com
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+            <div class="col-md-6 m-auto">
+                <div class="card card-body">
+
+                    <p class="text-center">
+                         You can also contact us throw our physical address
+                    </p>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">
+                        Get our physical addres here
+                    </button>
+                    
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-home"></i>Address</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            <div class="modal-body">
+                                Gisenyi, Rubavu at ...
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<%- include('../layouts/footer'); -%>
