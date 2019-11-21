@@ -88,4 +88,9 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+//Starting server
+const server = app.listen(process.env.PORT || 3000, () => {
+  console.log(`Server running on ${server.address().port}`);
+});
+
 module.exports = app;

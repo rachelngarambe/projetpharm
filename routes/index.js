@@ -14,90 +14,81 @@ initializePassport(passport,
 
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
 
   var parm = req.body.search;
-    mysql.query('SELECT m.id, m.title, m.description, m.image, c.price as price FROM medicament m INNER JOIN category c ON m.category = c.id', (err, rows,fields) =>
-    //mysql.query('SELECT * FROM medecine', (err, rows,fields) =>
-    {
-      if (!err)
-    {
+  mysql.query('SELECT m.id, m.title, m.description, m.image, c.price as price FROM medicament m INNER JOIN category c ON m.category = c.id', (err, rows, fields) =>
+  //mysql.query('SELECT * FROM medecine', (err, rows,fields) =>
+  {
+    if (!err) {
       res.render('shop/index', { title: 'my_pharmacy|home', result: rows });
       //res.send(rows);
     }
-    else
-    {
-      res.render('error', {title: 'Error on your query'});
+    else {
+      res.render('error', { title: 'Error on your query' });
     }
-    });
-  
-  
+  });
+
+
 });
 
 /* GET home page. */
-router.get('/search', function(req, res, next) {
+router.get('/search', function (req, res, next) {
 
   var parm = req.body.search;
 
-      mysql.query("SELECT m.id, m.title, m.description, m.image, c.price as price FROM medicament m INNER JOIN category c ON m.category = c.id WHERE title LIKE '%"+req.body.search+"%'", (err, rows,fields) =>
-    //mysql.query('SELECT * FROM medecine', (err, rows,fields) =>
-    {
-      if (!err)
-    {
+  mysql.query("SELECT m.id, m.title, m.description, m.image, c.price as price FROM medicament m INNER JOIN category c ON m.category = c.id WHERE title LIKE '%" + req.body.search + "%'", (err, rows, fields) =>
+  //mysql.query('SELECT * FROM medecine', (err, rows,fields) =>
+  {
+    if (!err) {
       res.render('shop/index', { title: 'my_pharmacy|home', result: rows });
       //res.send(rows);
     }
-    else
-    {
-      res.render('error', {title: 'Error on your query'});
+    else {
+      res.render('error', { title: 'Error on your query' });
     }
-    });
-  
+  });
+
 });
 
 /* GET news page. */
-router.get('/news', function(req, res, next) {
-  mysql.query('SELECT * FROM news', (err, rows, fields) =>
-  {
-    if (!err)
-    {
-      res.render('shop/news', { title: 'my_pharmacy|news', result: rows }); 
+router.get('/news', function (req, res, next) {
+  mysql.query('SELECT * FROM news', (err, rows, fields) => {
+    if (!err) {
+      res.render('shop/news', { title: 'my_pharmacy|news', result: rows });
     }
   })
 });
 
- /*GET Product page.*/
-router.get('/product', function(req, res, next) {
-  mysql.query('SELECT m.title, m.description, m.image, c.type, c.price as price FROM medicament m INNER JOIN category c ON m.category = c.id', (err, rows,fields) =>
+/*GET Product page.*/
+router.get('/product', function (req, res, next) {
+  mysql.query('SELECT m.title, m.description, m.image, c.type, c.price as price FROM medicament m INNER JOIN category c ON m.category = c.id', (err, rows, fields) =>
   //mysql.query('SELECT * FROM medecine', (err, rows,fields) =>
   {
-    if (!err)
-  {
-    res.render('shop/product', { title: 'my_pharmacy|product', result: rows });
-   //res.send(rows);
-  }
-  else
-  {
-    res.render('error', {title: 'Error on your query'});
-  }
+    if (!err) {
+      res.render('shop/product', { title: 'my_pharmacy|product', result: rows });
+      //res.send(rows);
+    }
+    else {
+      res.render('error', { title: 'Error on your query' });
+    }
   });
-  
+
 });
 
 /* GET About page. */
-router.get('/about', function(req, res, next) {
+router.get('/about', function (req, res, next) {
   res.render('shop/about', { title: 'my_pharmacy|about us' });
 });
 
 /* GET Contact page. */
-router.get('/contact', function(req, res, next) {
+router.get('/contact', function (req, res, next) {
   res.render('shop/contact', { title: 'my_pharmacy|contact' });
 });
 
-router.get('/add-to-cart/:id', (req, res, next) =>
-{
+router.get('/add-to-cart/:id', (req, res, next) => {
   var id = req.body.id;
-  res.render('shop/add-to-cart', {id: id });
+  res.render('shop/add-to-cart', { id: id });
 });
 
 
@@ -107,43 +98,65 @@ router.get('/add-to-cart/:id', (req, res, next) =>
  * *****************
  * *************************************************************************** */
 
-router.get('/login', (req, res, next) =>
-{
-  res.render('admin/login', {title: 'Admin'})
+router.get('/login', (req, res, next) => {
+  res.render('admin/login', { title: 'Admin' })
 });
 
-router.get('/pharmacy', (req, res, next) =>
-{
+router.get('/pharmacy', (req, res, next) => {
+  mysql.query("SELECT * From pharmacy", (err, rows, field) => {
+    if (!err) {
+      res.render('admin/pharmacy', { title: 'Admin', result: rows })
+    }
+    else {
+      res.send(err);
+    }
+  });
+});
+
+router.get('/medecines', (req, res, next) => {
   mysql.query("SELECT c.type, c.price, m.title, m.image, m.quantity, p.id, p.name, a.location, a.num "
-    +"FROM category c INNER JOIN medicament m ON c.id = m.category INNER JOIN pharmacy p ON m.pharmacy = p.id "
-    +"INNER JOIN addresses a ON p.address = a.id", (err, rows, field) =>
-    {
-      if (!err)
-      {
-        res.render('admin/pharmacy', {title: 'Admin', result: rows})
+    + "FROM category c INNER JOIN medicament m ON c.id = m.category INNER JOIN pharmacy p ON m.pharmacy = p.id "
+    + "INNER JOIN addresses a ON p.address = a.id", (err, rows, field) => {
+      if (!err) {
+        res.render('admin/medecine', { title: 'Admin', result: rows })
       }
-      else
-      {
+      else {
         res.send(err);
       }
     });
-  
 });
 
-router.get('/customer', (req, res, next) =>
-{
-  res.render('admin/customer', { title: 'Admin'});
+router.get('/customers', (req, res, next) => {
+  mysql.query("SELECT * from client", (err, rows, field) => {
+    if (!err) {
+      res.render('admin/customer', { title: 'Admin', result: rows })
+    }
+    else {
+      res.send(err);
+    }
+  });
 });
 
-router.post('/pharma', (req, res, next) =>
-{
-  var sql2 = "INSERT INTO `addresses`(`location`, `num`) VALUES (?,?)";
-  var sql1 = "INSERT INTO `pharmacy`(`name`, `address`) VALUES (?,(SELECT COUNT(id) FROM addresses))";
-  var parms = [req.body.p_name];
-  var parms1 = [req.body.p_address, req.body.p_location];
+router.get('/buyers', (req, res, next) => {
+  mysql.query("SELECT c.id, c.firstname, c.lastname, p.id, p.assurence, p.amounts, p.product, p.date "
+    + "FROM client c JOIN paiement p ON c.id = p.assurence", (err, rows, field) => {
+      if (!err) {
+        res.render('admin/buyer', { title: 'Admin', result: rows })
+      }
+      else {
+        res.send(err);
+      }
+    });
+});
 
-  mysql.query(sql2, parms1);
-  mysql.query(sql1, parms);
+
+
+router.post('/pharma', (req, res, next) => {
+  // var sql2 = "INSERT INTO `addresses`(`location`, `num`) VALUES (?,?)";
+  var sql1 = "INSERT INTO `pharmacy`(`name`, `address`) VALUES (?,?)";
+  var parms1 = [req.body.p_name, req.body.p_address];
+
+  mysql.query(sql1, parms1);
 
   res.redirect('/pharmacy');
 });
@@ -155,7 +168,7 @@ router.post('/pharma', (req, res, next) =>
  * *************************************************************************** */
 
 /* GET home page. */
-router.post('/add-to-cart/:id', function(req, res, next) {
+router.post('/add-to-cart/:id', function (req, res, next) {
   /*mysql.query("SELECT m.id, m.title, m.description, m.image, c.price as price FROM medicament m INNER JOIN category c ON m.category = c.id WHERE title = '"+req.body.title+"'", (err, rows,fields) =>
   //mysql.query('SELECT * FROM medecine', (err, rows,fields) =>
   {
@@ -172,20 +185,18 @@ router.post('/add-to-cart/:id', function(req, res, next) {
   */
 });
 
-router.post('/contact', (req, res, err) =>
-{
-  
+router.post('/contact', (req, res, err) => {
+
   var sql = "INSERT INTO contact (name, email, content) VALUES (?,?,?)";
   var parms = [req.body.name, req.body.email, req.body.content];
   mysql.query(sql, parms);
-  
-    res.redirect('/');
-  
+
+  res.redirect('/');
+
 });
 
-router.post('/add-to-cart', (req, res, next) =>
-{
-  var sql = "INSERT INTO facture (montant, category, quantity, payement_mode, person) VALUES (?,(SELECT id FROM category WHERE type = '"+ req.body.title +"'),?,?,?";
+router.post('/add-to-cart', (req, res, next) => {
+  var sql = "INSERT INTO facture (montant, category, quantity, payement_mode, person) VALUES (?,(SELECT id FROM category WHERE type = '" + req.body.title + "'),?,?,?";
 });
 
 

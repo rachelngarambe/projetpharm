@@ -1,121 +1,35 @@
 <%- include('../layouts/headeradmin'); -%>
 
-    <!----------------Modal add Pharmacy-------------------------------->
-
-    <button type="button" style="position: relative; float: right;" class="btn btn-outline-success my-3" data-toggle="modal" 
+<!----------------Modal add Pharmacy-------------------------------->
+<button type="button" style="position: relative; float: right;" class="btn btn-outline-success my-3" data-toggle="modal"
     data-target="#exampleModal" data-whatever="@getbootstrap"><i class="fas fa-plus"></i> Add Pharmacy
-    </button>
-
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">New Pharmacy</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="/pharma" method="POST">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">Pharmacy name</span>
-                            </div>
-                            <input type="text" class="form-control" placeholder="Pharmacy name" aria-label="p_name" 
-                                aria-describedby="basic-addon1" name="p_name">
-                        </div>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">Pharmacy adress</span>
-                            </div>
-                            <input type="text" class="form-control" placeholder="District, Quater, Avenu" aria-label="p_address" 
-                                aria-describedby="basic-addon1" name="p_address">
-                        </div>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">Location number</span>
-                            </div>
-                            <input type="text" class="form-control" placeholder="Number of block or appartment" 
-                            aria-label="p_location" 
-                            aria-describedby="basic-addon1" name="p_location">
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!----------------End modal---------------------------------------->
-
-    <!----------------Modal add Medecine-------------------------------->
-
-    <button type="button" style="position: relative; float: right; margin-right: 4px;" class="btn btn-outline-success my-3" 
-    data-toggle="modal" data-target="#exampleModal1" data-whatever="@getbootstrap">
-        <i class="fas fa-plus"></i> Add Medecine
 </button>
 
-<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">New Medecine</h5>
+                <h5 class="modal-title" id="exampleModalLabel">New Pharmacy</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
+                    <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <form action="/pharma" method="POST">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <label class="input-group-text" for="inputGroupSelect01">Pharmacy name</label>
+                            <span class="input-group-text" id="basic-addon1">Pharmacy name</span>
                         </div>
-                        <select class="custom-select" id="inputGroupSelect01">
-                            <option selected>Choose</option>
-                            <option value="1">Glophar</option>
-                        </select> 
+                        <input type="text" class="form-control" placeholder="Pharmacy name" aria-label="p_name"
+                            aria-describedby="basic-addon1" name="p_name">
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1">Medecine</span>
+                            <span class="input-group-text" id="basic-addon1">Pharmacy address</span>
                         </div>
-                        <input type="text" class="form-control" placeholder="Medecine name" aria-label="m_name" 
-                            aria-describedby="basic-addon1" name="m_name">
-                    </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1">Description</span>
-                        </div>
-                        <textarea class="form-control" aria-label="p_location" aria-describedby="basic-addon1" name="m_descr">
-                        </textarea>
-                    </div>                 
-                    <div class="form-group">
-                        <label for="exampleFormControlFile1">Upload image</label>
-                        <input type="file" name="m_image" class="form-control-file" id="exampleFormControlFile1">
-                      </div>                  
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1">Quantity</span>
-                        </div>
-                        <input type="text" class="form-control" placeholder="Quantity" aria-label="m_quantity" 
-                            aria-describedby="basic-addon1" name="m_quantity">
-                    </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1">Category</span>
-                        </div>
-                        <input type="text" class="form-control" placeholder="Medecine category" aria-label="m_category" 
-                            aria-describedby="basic-addon1" name="m_category">
-                    </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1">Price</span>
-                        </div>
-                        <input type="text" class="form-control" placeholder="Medecine price" aria-label="m_price" 
-                            aria-describedby="basic-addon1" name="m_price">
+                        <input type="text" class="form-control" placeholder="District, Quater, Avenu"
+                            aria-label="p_address" aria-describedby="basic-addon1" name="p_address">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -128,36 +42,23 @@
 </div>
 
 <!----------------End modal---------------------------------------->
-    
-    <table class="table table-dark">
-        <thead>
+
+<table class="table table-dark">
+    <thead>
         <tr>
             <th scope="col">Id</th>
-            <th scope="col">NAME</th>
+            <th scope="col">PHARMANCE NAME</th>
             <th scope="col">LOCATION</th>
-            <th scope="col">NUMBER</th>
-            <th scope="col">MEDECINE</th>
-            <th scope="col">QUANTITY</th>
-            <th scope="col">IMAGE</th>
-            <th scope="col">CATEGORY</th>
-            <th scope="col">PRICE</th>
         </tr>
-        </thead>
-        <tbody>
-                <% result.forEach((item) => { %>
+    </thead>
+    <tbody>
+        <% result.forEach((item) => { %>
         <tr>
             <td><%= item.id %></td>
             <td><%= item.name %></td>
-            <td><%= item.location %></td>
-            <td><%= item.num %></td>
-            <td><%= item.title %></td>
-            <td><%= item.quantity %></td>
-            <td><img src="images/<%= item.image %>" alt="<%= item.title %>" srcset="" style="width: 30px; height: 20px;"></td>
-            <td><%= item.type %></td>
-            <td><%= item.price %></td>
+            <td><%= item.address %></td>
         </tr>
         <% }); %>
-    
-        </tbody>
-    </table>
-  <%- include('../layouts/footer'); -%>
+    </tbody>
+</table>
+<%- include('../layouts/footer'); -%>
