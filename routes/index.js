@@ -4,6 +4,11 @@ var bcrypt = require('bcrypt-nodejs');
 const passport = require('passport');
 const { ensureAuthenticated } = require('../config/auth');
 
+const dotenv = require('dotenv');
+dotenv.config();
+const stripe = require('stripe')(process.env.SECRET_KEY); // Add your Secret Key Here
+
+
 
 var mysql = require('../config/connect');
 
@@ -137,6 +142,18 @@ router.get('/customers', (req, res, next) => {
   });
 });
 
+// contacted list
+router.get('/contacts', (req, res, next) => {
+  mysql.query("SELECT * from contact", (err, rows, field) => {
+    if (!err) {
+      res.render('admin/contact', { title: 'Admin', result: rows })
+    }
+    else {
+      res.send(err);
+    }
+  });
+});
+
 router.get('/buyers', (req, res, next) => {
   mysql.query("SELECT c.id, c.firstname, c.lastname, p.id, p.assurence, p.amounts, p.product, p.date "
     + "FROM client c JOIN paiement p ON c.id = p.assurence", (err, rows, field) => {
@@ -149,6 +166,33 @@ router.get('/buyers', (req, res, next) => {
     });
 });
 
+/* Paying page */
+router.get('/pa', function (req, res, next) {
+  res.render("index1.html", { title: 'my_pharmacy | payment' });
+});
+
+// Add payment
+router.post("/charge", (req, res) => {
+  try {
+    stripe.customers
+      .create({
+        name: req.body.name,
+        email: req.body.email,
+        source: req.body.stripeToken
+      })
+      .then(customer =>
+        stripe.charges.create({
+          amount: req.body.amount * 100,
+          currency: "rwf",
+          customer: customer.id
+        })
+      )
+      .then(() => res.render("completed.html"))
+      .catch(err => console.log(err));
+  } catch (err) {
+    res.send(err);
+  }
+});
 
 
 router.post('/pharma', (req, res, next) => {
@@ -192,7 +236,6 @@ router.post('/contact', (req, res, err) => {
   mysql.query(sql, parms);
 
   res.redirect('/');
-
 });
 
 router.post('/add-to-cart', (req, res, next) => {

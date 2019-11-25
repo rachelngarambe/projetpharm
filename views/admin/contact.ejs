@@ -1,0 +1,28 @@
+<%- include('../layouts/headeradmin'); -%>
+
+<button type="submit" class="btn btn-outline-success m-2" style="position: relative; float: right;"><i
+        class="fas fa-print"></i> Print</button>
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Names</th>
+            <th scope="col">Email</th>
+            <th scope="col">Content</th>
+            <th scope="col">Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% result.forEach((item) => { %>
+        <tr>
+            <td><%= item.id %></td>
+            <td><%= item.name %></td>
+            <td><%= item.email %></td>
+            <td><%= item.content %></td>
+            <td><%= item.date %></td>
+        </tr>
+        <% }); %>
+
+    </tbody>
+</table>
+<%- include('../layouts/footer'); -%>
