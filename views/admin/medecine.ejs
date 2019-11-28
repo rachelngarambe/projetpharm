@@ -18,12 +18,12 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="/pharma" method="POST">
+                <form action="/medecine" method="POST" enctype="multipart/form-data">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <label class="input-group-text" for="inputGroupSelect01">Pharmacy name</label>
                         </div>
-                        <select class="custom-select" id="inputGroupSelect01">
+                        <select class="custom-select" id="inputGroupSelect01" name="m_pharmacy">
                             <option selected>Choose</option>
                             <option value="1">Glophar</option>
                         </select>
@@ -40,7 +40,7 @@
                             <span class="input-group-text" id="basic-addon1">Description</span>
                         </div>
                         <textarea class="form-control" aria-label="p_location" aria-describedby="basic-addon1"
-                            name="m_descr">
+                            name="m_description">
                         </textarea>
                     </div>
                     <div class="form-group">

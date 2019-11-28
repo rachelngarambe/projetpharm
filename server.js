@@ -1,14 +1,15 @@
-const createError = require('http-errors');
-const express = require('express');
-const bodyParser = require('body-parser');
-const dotenv = require('dotenv');
-const cookieParser = require('cookie-parser');
-const expressHbs = require('express-handlebars');
-const path = require('path');
-const logger = require('morgan');
-const passport = require('passport');
-const flash = require('connect-flash');
-const session = require('express-session');
+var createError = require('http-errors');
+var express = require('express');
+var session = require('express-session');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+var dotenv = require('dotenv');
+var expressHbs = require('express-handlebars');
+var path = require('path');
+var logger = require('morgan');
+var passport = require('passport');
+var flash = require('connect-flash');
+
 
 dotenv.config();
 const stripe = require('stripe')(process.env.SECRET_KEY); // Add your Secret Key Here
@@ -19,8 +20,6 @@ const usersRouter = require('./routes/users');
 
 const app = express();
 
-//Connect flash
-app.use(flash());
 // This will make our form data much more useful
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -33,10 +32,13 @@ app.use(express.static('public'));
 
 //Express Session
 app.use(session({
-  secret: 'secret',
+  secret: 'this is secret',
   resave: true,
   saveUninitialized: true
 }));
+
+//Connect flash
+app.use(flash());
 
 //Global Vars
 app.use((req, res, next) => {
@@ -53,11 +55,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, './views')));
 
 // Future Code Goes Here
-
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
-
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session

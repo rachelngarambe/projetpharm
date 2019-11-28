@@ -1,14 +1,13 @@
 var express = require('express');
 var router = express.Router();
-var bcrypt = require('bcrypt-nodejs');
 const passport = require('passport');
+var multer = require('multer');
+var fs = require("fs");
 const { ensureAuthenticated } = require('../config/auth');
 
 const dotenv = require('dotenv');
 dotenv.config();
 const stripe = require('stripe')(process.env.SECRET_KEY); // Add your Secret Key Here
-
-
 
 var mysql = require('../config/connect');
 
@@ -33,8 +32,6 @@ router.get('/', function (req, res, next) {
       res.render('error', { title: 'Error on your query' });
     }
   });
-
-
 });
 
 /* GET home page. */
@@ -107,7 +104,7 @@ router.get('/login', (req, res, next) => {
   res.render('admin/login', { title: 'Admin' })
 });
 
-router.get('/pharmacy', (req, res, next) => {
+router.get('/pharmacy', ensureAuthenticated, (req, res, next) => {
   mysql.query("SELECT * From pharmacy", (err, rows, field) => {
     if (!err) {
       res.render('admin/pharmacy', { title: 'Admin', result: rows })
@@ -118,7 +115,7 @@ router.get('/pharmacy', (req, res, next) => {
   });
 });
 
-router.get('/medecines', (req, res, next) => {
+router.get('/medecines', ensureAuthenticated, (req, res, next) => {
   mysql.query("SELECT c.type, c.price, m.title, m.image, m.quantity, p.id, p.name, a.location, a.num "
     + "FROM category c INNER JOIN medicament m ON c.id = m.category INNER JOIN pharmacy p ON m.pharmacy = p.id "
     + "INNER JOIN addresses a ON p.address = a.id", (err, rows, field) => {
@@ -131,7 +128,7 @@ router.get('/medecines', (req, res, next) => {
     });
 });
 
-router.get('/customers', (req, res, next) => {
+router.get('/customers', ensureAuthenticated, (req, res, next) => {
   mysql.query("SELECT * from client", (err, rows, field) => {
     if (!err) {
       res.render('admin/customer', { title: 'Admin', result: rows })
@@ -143,7 +140,7 @@ router.get('/customers', (req, res, next) => {
 });
 
 // contacted list
-router.get('/contacts', (req, res, next) => {
+router.get('/contacts', ensureAuthenticated, (req, res, next) => {
   mysql.query("SELECT * from contact", (err, rows, field) => {
     if (!err) {
       res.render('admin/contact', { title: 'Admin', result: rows })
@@ -154,7 +151,7 @@ router.get('/contacts', (req, res, next) => {
   });
 });
 
-router.get('/buyers', (req, res, next) => {
+router.get('/buyers', ensureAuthenticated, (req, res, next) => {
   mysql.query("SELECT c.id, c.firstname, c.lastname, p.id, p.assurence, p.amounts, p.product, p.date "
     + "FROM client c JOIN paiement p ON c.id = p.assurence", (err, rows, field) => {
       if (!err) {
@@ -167,7 +164,7 @@ router.get('/buyers', (req, res, next) => {
 });
 
 /* Paying page */
-router.get('/pa', function (req, res, next) {
+router.get('/pa', ensureAuthenticated, function (req, res, next) {
   res.render("index1.html", { title: 'my_pharmacy | payment' });
 });
 
@@ -195,8 +192,7 @@ router.post("/charge", (req, res) => {
 });
 
 
-router.post('/pharma', (req, res, next) => {
-  // var sql2 = "INSERT INTO `addresses`(`location`, `num`) VALUES (?,?)";
+router.post('/pharma', ensureAuthenticated, (req, res, next) => {
   var sql1 = "INSERT INTO `pharmacy`(`name`, `address`) VALUES (?,?)";
   var parms1 = [req.body.p_name, req.body.p_address];
 
@@ -205,6 +201,30 @@ router.post('/pharma', (req, res, next) => {
   res.redirect('/pharmacy');
 });
 
+var upload = multer({ dest: '/tmp/' });
+
+router.post('/medecine', ensureAuthenticated, upload.single('m_image'), (req, res, next) => {
+
+  var file = __dirname + '../public/images' + req.file.filename;
+  fs.rename(req.file.path, file, function (err) {
+    if (err) {
+      console.log(err);
+      // res.sendStatus(500);
+    } else {
+      // succesfful uploaded
+      var sql1 = "INSERT INTO `medicament`(`title`, `description`,`category`,`pharmacy`, `image`,`quantity` ) VALUES (?,?,?,?,?,?)";
+      var sql2 = "INSERT INTO `category`(`type`, `price` ) VALUES (?,?)";
+      var parms1 = [req.body.m_name, req.body.m_description, req.body.m_category, req.body.m_pharmacy, req.file.m_image, req.body.m_quantity];
+      var parms2 = [req.body.m_name, req.body.m_price];
+
+      mysql.query(sql1, parms1);
+      mysql.query(sql2, parms2);
+
+      res.redirect('/medecines');
+
+    }
+  });
+});
 /*******************************
  * **********
  * Admin
