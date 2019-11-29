@@ -1,19 +1,11 @@
 <%- include('../layouts/header'); -%>
 
 <div class="row">
-    <div class="jumbotron col-md-8 pt-2 py-2 my-1 m-auto">
-        <form action="/search" method="get">
-            <div class="input-group">
-                    <input type="search" name="search" id="search" class="text-center form-control" placeholder="Search" aria-label="search" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-success" id="basic-addon2" type="submit"><i class="fas fa-search"></i></button>
-                    </div>
-            </div>
-        </form>
-    </div>
+    <!-- <div class="jumbotron col-md-8 pt-2 py-2 my-1 m-auto">
+    </div> -->
     <div class="col-md-8 col-sm-12">
         <!--begin carousel-->
-        <header class=" my-4 slide" >
+        <!-- <header class=" my-4 slide">
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
                     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -25,19 +17,19 @@
                 </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item active" style="width: 100%; height: 250px">
-                    <img src="images/img2.jpeg" class="d-block w-100" alt="...">
+                        <img src="images/img2.jpeg" class="d-block w-100" alt="...">
                     </div>
                     <div class="carousel-item" style="width: 100%; height: 250px">
-                    <img src="images/img2.jpeg" class="d-block w-100" alt="...">
+                        <img src="images/img2.jpeg" class="d-block w-100" alt="...">
                     </div>
                     <div class="carousel-item" style="width: 100%; height: 250px">
-                    <img src="images/img3.jpg" class="d-block w-100" alt="...">
+                        <img src="images/img3.jpg" class="d-block w-100" alt="...">
                     </div>
                     <div class="carousel-item" style="width: 100%; height: 250px">
-                    <img src="images/img4.jpg" class="d-block w-100" alt="...">
+                        <img src="images/img4.jpg" class="d-block w-100" alt="...">
                     </div>
                     <div class="carousel-item" style="width: 100%; height: 250px">
-                    <img src="images/img5.jpg" class="d-block w-100" alt="...">
+                        <img src="images/img5.jpg" class="d-block w-100" alt="...">
                     </div>
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -49,32 +41,37 @@
                     <span class="sr-only">Next</span>
                 </a>
             </div>
-        </header>
-    <!--end carousel-->
+        </header> -->
+        <!--end carousel-->
     </div>
-    
-    <div class="col-md-4 col-sm-12 mt-3">
+
+    <!-- <div class="col-md-4 col-sm-12 mt-3">
         <div class="card bg-dark text-white">
             <img src="images/pharma.jpg" class="card-img" alt="...">
             <div class="card-img-overlay">
                 <h5 class="card-title" style="font-size: 1.5em">My Pharmacy</h5>
-                <p class="card-text" style="font-size: 1.3em">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                <p class="card-text" style="font-size: 1.3em">This is a wider card with supporting text below as a
+                    natural lead-in to additional content. This content is a little bit longer.</p>
                 <p class="card-text">This is to provide for you a good heal easely</p>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>
 
-
+<br>
+<br>
+<br>
 <div class="row">
     <% result.forEach((item) => { %>
     <div class="col-sm-6 col-md-4 my-1">
-        <form action="/add-to-cart/" method="POST">
+        <form action="/add-to-cart/<%= item.title %>" method="POST">
             <div class="card" style="width: 18rem;">
-                <img src="images/<%= item.image %>" id="img" name="img" height="130px" class="card-img-top img-responsive" alt="...">
+                <img src="images/<%= item.image %>" id="img" name="img" height="130px"
+                    class="card-img-top img-responsive" alt="...">
                 <div class="card-body">
                     <input type="text" name="title" id="title" class="card-title" value="<%= item.id %>" hidden>
                     <h5 class="card-title"><%= item.title %></h5>
+                    <h5 class="card-title"><%= item.pharmacyname %></h5>
                     <p class="card-text"><%= item.description %></p>
                     <div class="clearfix">
                         <hr>
@@ -83,12 +80,12 @@
                                 <div class="price pull-left">$<%= item.price %></div>
                             </div>
                             <div class="col-md-8">
+
                                 <!--<a class="btn btn-warning" href="/add-to-cart/<%= item.id %>">Add to Cart <i class="fas fa-shopping-cart pull-right"></i></a>-->
-                                <button type="submit" class="btn btn-warning" data-toggle="modal" data-target="#exampleModalLong">
+                                <button type="submit" class="btn btn-warning" data-toggle="modal"
+                                    data-target="#exampleModalLong">
                                     Buy now <i class="fas fa-shopping-cart pull-right"></i>
                                 </button>
-                                
-                                
                             </div>
                         </div>
                     </div>

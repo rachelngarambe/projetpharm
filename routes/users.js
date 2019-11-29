@@ -31,8 +31,8 @@ router.get('/signin', function (req, res, next) {
 });
 
 /* GET Register page. */
-router.get('/signup', function (req, res, next) {
-  res.render('user/signup', { title: 'Signup' });
+router.get('/add-user', function (req, res, next) {
+  res.render('user/adduser', { title: 'AddUser' });
 });
 
 /* GET Register page. */
@@ -43,19 +43,18 @@ router.get('/logout', function (req, res, next) {
 
 //post
 
-
-router.post('/register', (req, res, err) => {
+router.post('/register', ensureAuthenticated, (req, res, err) => {
   var hashedPassword = bcrypt.hashSync(req.body.password, null, null);
   var sql = "INSERT INTO client (firstname, lastname, gender, phone, email, password, addre) VALUES (?,?,?,?,?,?,?)";
   var parms = [req.body.first, req.body.last, req.body.gender, req.body.phone, req.body.email, hashedPassword, req.body.address];
   mysql.query(sql, parms);
 
-  res.redirect('/users/signin');
+  res.redirect('/../user');
 });
 
 router.post('/signin', (req, res, next) => {
   passport.authenticate('local', {
-    successRedirect: '/users/profile',
+    successRedirect: '/medecines',
     failureRedirect: '/users/signin',
     failureFlash: true
   })(req, res, next);

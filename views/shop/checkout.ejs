@@ -1,0 +1,83 @@
+<%- include('../layouts/header'); -%>
+<script>
+  if (!localStorage.getItem('medicalmanagementEmail')) {
+    window.location.href = '/';
+  }
+
+  // if (!localStorage.getItem('medicalmanagemenTotal') || localStorage.getItem('medicalmanagemenTotal') == 0) {
+  //   window.location.href = '/';
+  // }
+
+  function saveTotal() {
+    var setTotal = document.getElementById("total").value;
+    localStorage.setItem('medicalmanagementTotal', setTotal);
+  }
+</script>
+<h1>checkout</h1>
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">No</th>
+      <th scope="col">Item</th>
+      <th scope="col">price</th>
+      <th scope="col">quantity/(pk)</th>
+      <th scope="col">Total</th>
+      <th scope="col">Your email</th>
+      <th scope="col">Date</th>
+      <th scope="col">Remove</th>
+    </tr>
+  </thead>
+  <style>
+    .hide {
+      visibility: hidden
+    }
+  </style>
+  <tbody>
+    <% var No = 0; var totalQty = 0; var alltotal = 0 %>
+
+    <% result.forEach((item) => { %>
+    <div class="hide"><%=  alltotal +=item.price*item.quantity %></div>
+
+    <tr>
+      <td><%= No +=1 %></td>
+      <td><%= item.items %></td>
+      <td><%= item.price %></td>
+      <td><%= item.quantity %></td>
+      <td><%= total=item.price*item.quantity %> Rwf</td>
+      <td><%= item.personemail %></td>
+      <td><%= item.date %></td>
+      <td>
+        <form action="/removing" method="POST">
+          <input type="text" name="itemId" id="itemId" value="<%= item.id %>" hidden>
+          <button type="submit" class="btn btn-danger">
+            <i class="fas fa-trash pull-left"></i>
+          </button>
+        </form>
+      </td>
+    </tr>
+    <% }); %>
+
+  </tbody>
+  <th colspan="4">
+    Total pay
+  </th>
+  <th>
+    <%= alltotal %> Rwf
+  </th>
+</table>
+<form onsubmit="saveTotal()" method="POST" action="/checking">
+  <input type="text" name="total" id="total" value="<%= alltotal %>" hidden>
+  <button type="submit" class="btn btn-warning">
+    Checkout now
+  </button> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <button type="button" onclick="location.href='/';"
+    class="btn btn-primary"> Back to Buy another<i class="fas fa-shopping-cart pull-right"></i>
+  </button>
+  </div>
+  </div>
+</form>
+
+
+</div>
+</div>
+
+<%- include('../layouts/footer'); -%>
