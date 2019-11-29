@@ -236,9 +236,9 @@ router.post('/medecine', ensureAuthenticated, (req, res, next) => {
 
 /* GET home page One Item in modal. */
 router.post('/add-to-cart/:title', function (req, res, next) {
-  mysql.query("SELECT m.id_item, m.title, m.description, m.image, c.price as price FROM medicament m INNER JOIN category c ON m.category = c.id WHERE title = '" + req.params.title + "'", (err, rows, fields) => {
+  mysql.query("SELECT m.id_item, m.title, m.pharmacy, p.name as pharmacyname, m.description, m.image, c.price as price FROM medicament m INNER JOIN category c ON m.category = c.id INNER JOIN pharmacy p ON m.pharmacy = p.id WHERE title = '" + req.params.title + "'", (err, rows, fields) => {
     if (!err) {
-      res.render('shop/add-to-cart', { title: 'my_pharmacy|home', result: rows });
+      res.render('shop/add-to-cart', { title: 'add-cart|home', result: rows });
       //res.send(rows);
     }
     else {
