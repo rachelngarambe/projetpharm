@@ -1,4 +1,5 @@
 var createError = require('http-errors');
+var http = require('http')
 var express = require('express');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
@@ -9,7 +10,7 @@ var path = require('path');
 var logger = require('morgan');
 var passport = require('passport');
 var flash = require('connect-flash');
-
+var fileUpload = require('express-fileupload');
 
 dotenv.config();
 const stripe = require('stripe')(process.env.SECRET_KEY); // Add your Secret Key Here
@@ -29,6 +30,7 @@ app.engine('html', require('ejs').renderFile);
 app.engine('.hbs', expressHbs({ defaultLayout: 'layout', extname: '.hbs' }));
 // app.use(express.static(path.join(__dirname, './views')));
 app.use(express.static('public'));
+app.use(fileUpload());
 
 //Express Session
 app.use(session({
@@ -44,6 +46,7 @@ app.use(flash());
 app.use((req, res, next) => {
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
+  res.locals.loginMessage = req.flash('loginMessage');
   res.locals.error = req.flash('error');
   next();
 });

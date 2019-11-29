@@ -1,28 +1,98 @@
-<%- include('../layouts/headeradmin'); -%>
+<!-- <%- include('../layouts/headeradmin'); -%> -->
+<!DOCTYPE html>
+<html>
 
-<button type="submit" class="btn btn-outline-success m-2" style="position: relative; float: right;"><i
-        class="fas fa-print"></i> Print</button>
-<table class="table table-dark">
-    <thead>
-        <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Names</th>
-            <th scope="col">Email</th>
-            <th scope="col">Content</th>
-            <th scope="col">Date</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% result.forEach((item) => { %>
-        <tr>
-            <td><%= item.id %></td>
-            <td><%= item.name %></td>
-            <td><%= item.email %></td>
-            <td><%= item.content %></td>
-            <td><%= item.date %></td>
-        </tr>
-        <% }); %>
+<head>
+    <title><%= title %></title>
+    <link rel="icon" type="image/png" href="../images/log.png">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+        integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
 
-    </tbody>
-</table>
-<%- include('../layouts/footer'); -%>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <h2>My Pharmacy<img src="../images/log.png" style="width: 90px; height: 30px;"></h2>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/medecines"><i class="fas fa-newspaper"></i> Medicines</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/pharmacy"><i class="fas fa-newspaper"></i> Pharmacy</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user"><i class="fas fa-pills"></i> Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/buyers"><i class="fas fa-address-card"></i> Customers</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/operations"><i class="fas fa-address-card"></i> Operations</a>
+                    </li>
+
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/contacts"><i class="fas fa-address-card"></i> Contacts</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-user-circle"></i> Me
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+
+                            <span role="separator" class="divider"></span>
+                            <a class="dropdown-item" href="/users/logout"><i class="fa fa-sign-out-alt"></i> Logout</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-4">
+        <script>
+            function myFunction() {
+                window.print();
+            }
+        </script>
+
+        <button type="submit" onclick="myFunction()" class="btn btn-outline-success m-2"
+            style="position: relative; float: right;"><i class="fas fa-print"></i> Print</button>
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Names</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Content</th>
+                    <th scope="col">Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% result.forEach((item) => { %>
+                <tr>
+                    <td><%= item.id %></td>
+                    <td><%= item.name %></td>
+                    <td><%= item.email %></td>
+                    <td><%= item.content %></td>
+                    <td><%= item.date %></td>
+                </tr>
+                <% }); %>
+
+            </tbody>
+        </table>
+        <%- include('../layouts/footer'); -%>

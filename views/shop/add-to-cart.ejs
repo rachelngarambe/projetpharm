@@ -1,1 +1,112 @@
-<h1>Add to cart</h1>
+<%- include('../layouts/header'); -%>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+
+  if (!localStorage.getItem('medicalmanagementEmail')) {
+    $(window).on('load', function () {
+      $('#exampleModal').modal('show');
+    });
+  } else {
+
+  }
+
+  function myFunction() {
+    var getEmail = localStorage.getItem('medicalmanagementEmail');
+    document.getElementById("cart_email").value = getEmail;
+  }
+
+  function saveEmail() {
+    var setEmail = document.getElementById("email").value;
+    localStorage.setItem('medicalmanagementEmail', setEmail);
+  }
+</script>
+<!----------------Modal add email in localhost-------------------------------->
+<div class="modal show" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add your email</h5>
+      </div>
+      <div class="modal-body">
+        <div class="input-group-prepend">
+          <span class="badge badge-warning" id="basic-addon1">
+            <h5>Have you taken this medication before?</h5>
+          </span>
+        </div>
+        <br>
+        <div class="input-group-prepend">
+          <span class="badge badge-warning" id="basic-addon1">
+            <h5>Have you been prescribed this medication?</h5>
+          </span>
+        </div>
+        <br>
+
+        <form onsubmit="saveEmail()" method="POST" action="/savemail">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">If Yes, Enter your email</span>
+            </div>
+            <input type="email" class="form-control" placeholder="email" aria-label="email"
+              aria-describedby="basic-addon1" name="email" id="email" required />
+          </div>
+          <div class="modal-footer">
+            <button type="button" onclick="location.href='/'" class="btn btn-secondary" data-dismiss="modal">No,
+              Close</button>
+            <button type="submit" class="btn btn-primary">Yes, Continue</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!----------------End modal---------------------------------------->
+<% result.forEach((item) => { %>
+<div class="row mt-5">
+  <div class="col-md-6 m-auto">
+    <div class="card card-body" style="width: 37.5rem;">
+      <form action="/checkout" method="POST">
+        <div class="card" style="width: 35rem;">
+          <div class="card-body">
+            <input type="text" name="cart_title" id="title" class="card-title" value="<%= item.title %>" hidden>
+            <input type="text" name="cart_price" id="title" class="card-title" value="<%= item.price %>" hidden>
+            <input type="text" name="cart_email" id="cart_email" value="" hidden>
+            <h3 class="card-title">Medical name: <%= item.title %></h3>
+            <!-- <h5 class="card-title">Pharmacy name: <%= item.pharmacy %></h5> -->
+            <p class="card-text">Medical Description: <%= item.description %></p>
+            <div class="clearfix">
+              <hr>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="price pull-left">
+                    <h2>$<%= item.price %></h2>
+                  </div>
+                </div>
+                <br>
+                <br>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Quantity</span>
+                  </div>
+                  <input type="number" min="1" class="form-control" placeholder="Quantity" aria-label="m_quantity"
+                    aria-describedby="basic-addon1" name="cart_quantity">
+                </div>
+                <div class="col-md-8">
+                  <!--<a class="btn btn-warning" href="/add-to-cart/<%= item.id %>">Add to Cart <i class="fas fa-shopping-cart pull-right"></i></a>-->
+                  <button type="submit" onclick="myFunction()" class="btn btn-warning" data-toggle="modal"
+                    data-target="#exampleModalLong">
+                    Add to Cart <i class="fas fa-shopping-cart pull-right"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <% }); %>
+  </div>
+</div>
+<%- include('../layouts/footer'); -%>
