@@ -1,11 +1,11 @@
-module.exports = 
-{
-    'connection' : 
+module.exports =
     {
-        'host' : 'localhost',
-        'user' : 'root',
-        'password' : ''
-    },
-    'database' : 'pharmamanagement',
-    'user_table' : 'client'
-}
+        'connection':
+        {
+            'host': 'localhost',
+            'user': 'root',
+            'password': ''
+        },
+        'database': 'pharmamanagement',
+        'user_table': 'client'
+    }

@@ -1,4 +1,3 @@
-<!-- <%- include('../layouts/headeradmin'); -%> -->
 <!DOCTYPE html>
 <html>
 
@@ -30,13 +29,13 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/medecines"><i class="fas fa-newspaper"></i> Medicines</a>
                     </li>
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="/pharmacy"><i class="fas fa-newspaper"></i> Pharmacies</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/user"><i class="fas fa-pills"></i> Users</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a class="nav-link" href="/buyers"><i class="fas fa-address-card"></i> Customers</a>
                     </li>
 
@@ -65,50 +64,9 @@
     </nav>
     <div class="container mt-4">
 
-        <!----------------Modal add Pharmacy-------------------------------->
-        <button type="button" style="position: relative; float: right;" class="btn btn-outline-success my-3"
-            data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap"><i class="fas fa-plus"></i>
-            Add Pharmacy
-        </button>
-
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">New Pharmacy</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="/pharma" method="POST">
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">Pharmacy name</span>
-                                </div>
-                                <input type="text" class="form-control" placeholder="Pharmacy name" aria-label="p_name"
-                                    aria-describedby="basic-addon1" name="p_name" required>
-                            </div>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">Pharmacy address</span>
-                                </div>
-                                <input type="text" class="form-control" placeholder="District, Sector, Cell"
-                                    aria-label="p_address" aria-describedby="basic-addon1" name="p_address" required>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Save</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+        <div class="modal-header">
+            <h3 class="modal-title" id="exampleModalLabel">Clients Paiement</h3>
         </div>
-
-        <!----------------End modal---------------------------------------->
-
         <table class="table table-dark">
             <thead>
                 <tr>
@@ -118,20 +76,13 @@
                 </tr>
             </thead>
             <tbody>
-                <% var No= 0; %>
                 <% result.forEach((item) => { %>
                 <tr>
-                    <td><%= No +=1 %></td>
-                    <td><%= item.name %></td>
-                    <td><%= item.address %></td>
-                    <td>
-                        <form action="/deletepharma" method="POST">
-                            <input type="text" name="pharmaId" id="pharmaId" value="<%= item.id %>" hidden>
-                            <button type="submit" class="btn btn-danger">
-                                <i class="fas fa-trash pull-left"></i>
-                            </button>
-                        </form>
-                    </td>
+                    <td><%= item.id %></td>
+                    <td><%= item.firstname %> <%= item.lastname %></td>
+                    <td><%= item.product %></td>
+                    <td><%= item.amount %></td>
+                    <td><%= item.date %></td>
                 </tr>
                 <% }); %>
             </tbody>

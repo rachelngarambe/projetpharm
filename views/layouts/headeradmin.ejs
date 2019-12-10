@@ -1,56 +1,65 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel="icon"  type="image/png" href="../images/log.png">
-     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
-        integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
-        crossorigin="anonymous">
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    
-    <!-- Navigation -->
+
+<head>
+  <title><%= title %></title>
+  <link rel="icon" type="image/png" href="../images/log.png">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+    integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+
+  <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-success fixed-top">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#"><h2>My Pharmacy<img src="../images/log.png" style="width: 90px; height: 30px;"></h2></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <a class="navbar-brand" href="#">
+        <h2>My Pharmacy<img src="../images/log.png" style="width: 90px; height: 30px;"></h2>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="/params"><i class="fas fa-award"></i>  Params
-              <span class="sr-only">(current)</span>
+            <a class="nav-link" href="/medecines"><i class="fas fa-newspaper"></i> Medicines</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pharmacy"><i class="fas fa-newspaper"></i> Pharmacies</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/user"><i class="fas fa-pills"></i> Users</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/buyers"><i class="fas fa-address-card"></i> Customers</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/operations"><i class="fas fa-address-card"></i> Operations</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/contacts"><i class="fas fa-address-card"></i> Contacts</a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-user-circle"></i> Me
             </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+
+              <span role="separator" class="divider"></span>
+              <a class="dropdown-item" href="/users/logout"><i class="fa fa-sign-out-alt"></i> Logout</a>
+            </div>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/pharmacy"><i class="fas fa-newspaper"></i>  Pharmacy</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/customer"><i class="fas fa-pills"></i>  customer</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/buy"><i class="fas fa-address-card"></i>  buy</a>
-          </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-user-circle"></i>  Managment
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          
-            <span role="separator" class="divider"></span>
-            <a class="dropdown-item" href="/users/logout"><i class="fa fa-sign-out-alt"></i> Logout</a>
-          
-            <a class="dropdown-item" href="/users/signin"><i class="fa fa-user" aria-hidden="true"></i>  User Account</a>
-          
-        </div>
-      </li>
         </ul>
       </div>
     </div>
   </nav>
-
-    <div class="container mt-4">
+  <div class="container mt-4">

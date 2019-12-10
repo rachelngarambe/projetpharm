@@ -30,10 +30,10 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/medecines"><i class="fas fa-newspaper"></i> Medicines</a>
                     </li>
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="/pharmacy"><i class="fas fa-newspaper"></i> Pharmacies</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a class="nav-link" href="/user"><i class="fas fa-pills"></i> Users</a>
                     </li>
                     <li class="nav-item">
@@ -65,75 +65,43 @@
     </nav>
     <div class="container mt-4">
 
-        <!----------------Modal add Pharmacy-------------------------------->
-        <button type="button" style="position: relative; float: right;" class="btn btn-outline-success my-3"
-            data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap"><i class="fas fa-plus"></i>
-            Add Pharmacy
-        </button>
-
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">New Pharmacy</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="/pharma" method="POST">
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">Pharmacy name</span>
-                                </div>
-                                <input type="text" class="form-control" placeholder="Pharmacy name" aria-label="p_name"
-                                    aria-describedby="basic-addon1" name="p_name" required>
-                            </div>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">Pharmacy address</span>
-                                </div>
-                                <input type="text" class="form-control" placeholder="District, Sector, Cell"
-                                    aria-label="p_address" aria-describedby="basic-addon1" name="p_address" required>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Save</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!----------------End modal---------------------------------------->
-
+        <button type="submit" class="btn btn-outline-success m-2" style="position: relative; float: right;"><a
+                class="text-success" href="/../users/add-user">Add User</a></button>
         <table class="table table-dark">
             <thead>
                 <tr>
                     <th scope="col">Id</th>
-                    <th scope="col">PHARMANCE NAME</th>
-                    <th scope="col">LOCATION</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Address</th>
                 </tr>
             </thead>
             <tbody>
-                <% var No= 0; %>
+                <% var No = 0 %>
                 <% result.forEach((item) => { %>
                 <tr>
-                    <td><%= No +=1 %></td>
-                    <td><%= item.name %></td>
-                    <td><%= item.address %></td>
+                    <td><%= No +=1%></td>
+                    <td><%= item.firstname %></td>
+                    <td><%= item.lastname %></td>
+                    <td><%= item.gender %></td>
+                    <td><%= item.phone %></td>
+                    <td><%= item.email %></td>
+                    <td><%= item.addre %></td>
                     <td>
-                        <form action="/deletepharma" method="POST">
-                            <input type="text" name="pharmaId" id="pharmaId" value="<%= item.id %>" hidden>
+                        <form action="/deleteuser" method="POST">
+                            <input type="text" name="userId" id="userId" value="<%= item.id %>" hidden>
                             <button type="submit" class="btn btn-danger">
                                 <i class="fas fa-trash pull-left"></i>
                             </button>
                         </form>
                     </td>
+
                 </tr>
                 <% }); %>
+
             </tbody>
         </table>
         <%- include('../layouts/footer'); -%>

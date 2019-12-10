@@ -1,41 +1,93 @@
-<%- include('../layouts/header'); -%>
+<!DOCTYPE html>
+<html>
 
-<div class="jumbotron mt-5">
-  <h1 class="display-4">Who are we?</h1>
-  <p class="lead">We are your online pharmacy and we are here for tos erve you because your health is our preacupation</p>
-  <hr class="my-4">
-<p class="text-content">
-	Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit asperiores beatae est, maxime reiciendis eveniet explicabo dolores quas culpa officia aspernatur distinctio recusandae quasi provident consequuntur, iusto deserunt ullam alias.
-</p>
+<head>
+	<title><%= title %></title>
+	<link rel="icon" type="image/png" href="../images/log.png">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+		integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+	<link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
 
-  <!--modal--->
+<body>
 
-	<!-- Button trigger modal -->
-	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
-	GET YOUR MEDICATION
-	</button>
+	<!-- Navigation -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-success fixed-top">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">
+				<h2>My Pharmacy<img src="../images/log.png" style="width: 90px; height: 30px;"></h2>
+			</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+				aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
 
-	<!-- Modal -->
-	<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLongTitle">TWO WAY TO GET YOUR MEDICATION</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					need your medication fast?you can pay online mobilemoney and pick up at participanting pharmacy
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				</div>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="/"><i class="fas fa-home"></i> Home
+							<span class="sr-only">(current)</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/news"><i class="fas fa-newspaper"></i> News</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" href="/about"><i class="fas fa-address-card"></i> About</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/contact"><i class="fas fa-id-card-alt"></i> Contact</a>
+					</li>
+				</ul>
 			</div>
 		</div>
-	</div>
+	</nav>
 
-  <!----end modal----->
-</div>
+	<div class="container mt-4">
+		<%- include('../partials/messages.ejs'); -%>
 
-<%- include('../layouts/footer'); -%>
+		<div class="jumbotron mt-5">
+			<h1 class="display-4">Who are we?</h1>
+			<p class="lead">We are your online pharmacy and we are here for tos erve you because your health is our
+				preacupation</p>
+			<hr class="my-4">
+			<p class="text-content">
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit asperiores beatae est, maxime reiciendis eveniet
+				explicabo dolores quas culpa officia aspernatur distinctio recusandae quasi provident consequuntur, iusto
+				deserunt ullam alias.
+			</p>
+
+			<!--modal--->
+
+			<!-- Button trigger modal -->
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+				GET YOUR MEDICATION
+			</button>
+
+			<!-- Modal -->
+			<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+				aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLongTitle">TWO WAY TO GET YOUR MEDICATION</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							need your medication fast?you can pay online mobilemoney and pick up at participanting pharmacy
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!----end modal----->
+		</div>
+
+		<%- include('../layouts/footer'); -%>
