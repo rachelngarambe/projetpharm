@@ -4,6 +4,15 @@
 
 <script type="text/javascript">
 
+  function validateEmail(emailField) {
+    var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+    if (reg.test(emailField.value) == false) {
+      alert('Invalid Email Address');
+      return false;
+    }
+    return true;
+  }
+
   if (!localStorage.getItem('medicalmanagementEmail')) {
     $(window).on('load', function () {
       $('#exampleModal').modal('show');
@@ -49,15 +58,15 @@
             <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">If Yes, Enter your email</span>
             </div>
-            <input type="email" class="form-control" placeholder="email" aria-label="email"
+            <input type="text" onblur="validateEmail(this)" class="form-control" placeholder="email" aria-label="email"
               aria-describedby="basic-addon1" name="email" id="email" required />
           </div>
           <div class="modal-footer">
-            <button type="button" onclick="location.href='/'" class="btn btn-secondary" data-dismiss="modal">No,
-              Close</button>
             <button type="submit" class="btn btn-primary">Yes, Continue</button>
           </div>
         </form>
+        <button type="button" onclick="location.href='/'" class="btn btn-secondary" data-dismiss="modal">No,
+          Close</button>
       </div>
     </div>
   </div>
@@ -92,6 +101,24 @@
                   </div>
                   <input type="number" min="1" class="form-control" placeholder="Quantity" aria-label="m_quantity"
                     aria-describedby="basic-addon1" name="cart_quantity">
+                </div>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Choose Pharmacy</span>
+                  </div>
+                  <select class="form-control" name="cart_pharmacy" id="cart_pharmacy" required>
+                    <option value="">Choose Pharmacy</option>
+                    <% result.forEach((item) => { %>
+                    <option value="<%= item.pharmacyname %>"><%= item.pharmacyname %> | <%= item.address %> </option>
+                    <% }); %>
+                  </select>
+                </div>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Where are you located</span>
+                  </div>
+                  <input type="text" min="1" class="form-control" placeholder="your location" aria-label="m_location"
+                    aria-describedby="basic-addon1" name="cart_location">
                 </div>
                 <div class="col-md-8">
                   <!--<a class="btn btn-warning" href="/add-to-cart/<%= item.id %>">Add to Cart <i class="fas fa-shopping-cart pull-right"></i></a>-->

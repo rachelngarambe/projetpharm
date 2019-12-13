@@ -1,11 +1,69 @@
-<%- include('../layouts/header'); -%>
+<!DOCTYPE html>
+<html>
 
-<div class="row">
-    <!-- <div class="jumbotron col-md-8 pt-2 py-2 my-1 m-auto">
+<head>
+    <title><%= title %></title>
+    <link rel="icon" type="image/png" href="../images/log.png">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+        integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <h2>My Pharmacy<img src="../images/log.png" style="width: 90px; height: 30px;"></h2>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/"><i class="fas fa-home"></i> Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/product"><i class="fas fa-pills"></i> products
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/news"><i class="fas fa-newspaper"></i> News</a>
+                    </li>
+                    <!-- <li class="nav-item">
+            <a class="nav-link" href="/product"><i class="fas fa-pills"></i> Products</a>
+          </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about"><i class="fas fa-address-card"></i> About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact"><i class="fas fa-id-card-alt"></i> Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/how-to-buy"><i class="fas fa-id-card-alt"></i> How to use</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <%- include('../partials/messages.ejs'); -%>
+
+        <div class="row">
+            <!-- <div class="jumbotron col-md-8 pt-2 py-2 my-1 m-auto">
     </div> -->
-    <div class="col-md-8 col-sm-12">
-        <!--begin carousel-->
-        <!-- <header class=" my-4 slide">
+            <div class="col-md-8 col-sm-12">
+                <!--begin carousel-->
+                <!-- <header class=" my-4 slide">
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
                     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -42,10 +100,10 @@
                 </a>
             </div>
         </header> -->
-        <!--end carousel-->
-    </div>
+                <!--end carousel-->
+            </div>
 
-    <!-- <div class="col-md-4 col-sm-12 mt-3">
+            <!-- <div class="col-md-4 col-sm-12 mt-3">
         <div class="card bg-dark text-white">
             <img src="images/pharma.jpg" class="card-img" alt="...">
             <div class="card-img-overlay">
@@ -56,43 +114,48 @@
             </div>
         </div>
     </div> -->
-</div>
+        </div>
 
+        <br>
+        <br>
+        <br>
+        <button stype="button" style="margin-left:95%;" onclick="location.href='/checkout';" class="btn btn-warning"><i
+                class="fas fa-shopping-basket"></i>
+        </button>
+        <div class="row">
+            <% result.forEach((item) => { %>
+            <div class="col-sm-6 col-md-4 my-1">
+                <form action="/add-to-cart/<%= item.title %>" method="POST">
+                    <div class="card" style="width: 18rem;">
+                        <img src="images/<%= item.image %>" id="img" name="img" height="130px"
+                            class="card-img-top img-responsive" alt="...">
+                        <div class="card-body">
+                            <input type="text" name="title" id="title" class="card-title" value="<%= item.id %>" hidden>
+                            <h5 class="card-title"><%= item.title %></h5>
+                            <h5 class="card-title"><%= item.pharmacyname %></h5>
+                            <p class="card-text"><%= item.description %></p>
+                            <div class="clearfix">
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="price pull-left">$<%= item.price %></div>
+                                    </div>
+                                    <div class="col-md-8">
 
-<div class="row">
-    <% result.forEach((item) => { %>
-    <div class="col-sm-6 col-md-4 my-1">
-        <form action="/add-to-cart/<%= item.title %>" method="POST">
-            <div class="card" style="width: 18rem;">
-                <img src="images/<%= item.image %>" id="img" name="img" height="130px"
-                    class="card-img-top img-responsive" alt="...">
-                <div class="card-body">
-                    <input type="text" name="title" id="title" class="card-title" value="<%= item.id %>" hidden>
-                    <h5 class="card-title"><%= item.title %></h5>
-                    <h5 class="card-title"><%= item.pharmacyname %></h5>
-                    <p class="card-text"><%= item.description %></p>
-                    <div class="clearfix">
-                        <hr>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="price pull-left">$<%= item.price %></div>
-                            </div>
-                            <div class="col-md-8">
-
-                                <!--<a class="btn btn-warning" href="/add-to-cart/<%= item.id %>">Add to Cart <i class="fas fa-shopping-cart pull-right"></i></a>-->
-                                <button type="submit" class="btn btn-warning" data-toggle="modal"
-                                    data-target="#exampleModalLong">
-                                    Buy now <i class="fas fa-shopping-cart pull-right"></i>
-                                </button>
+                                        <!--<a class="btn btn-warning" href="/add-to-cart/<%= item.id %>">Add to Cart <i class="fas fa-shopping-cart pull-right"></i></a>-->
+                                        <button type="submit" class="btn btn-warning" data-toggle="modal"
+                                            data-target="#exampleModalLong">
+                                            Buy now <i class="fas fa-shopping-cart pull-right"></i>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
-        </form>
-    </div>
-    <% }); %>
-</div>
+            <% }); %>
+        </div>
 
 
-<%- include('../layouts/footer'); -%>
+        <%- include('../layouts/footer'); -%>

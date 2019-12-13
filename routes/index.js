@@ -20,6 +20,20 @@ router.get('/', function (req, res, next) {
 
   mysql.query('SELECT m.id_item, m.title, m.pharmacy, p.name as pharmacyname, m.description, m.image, c.price as price FROM medicament m INNER JOIN category c ON m.category = c.id INNER JOIN pharmacy p ON m.pharmacy = p.id', (err, rows, fields) => {
     if (!err) {
+      res.render('shop/home', { title: 'my_pharmacy|home', result: rows });
+      //res.send(rows);
+    }
+    else {
+      res.render('error', { title: 'Error on your query' });
+    }
+  });
+});
+
+/* GET home page. */
+router.get('/product', function (req, res, next) {
+
+  mysql.query('SELECT m.id_item, m.title, m.pharmacy, p.name as pharmacyname, m.description, m.image, c.price as price FROM medicament m INNER JOIN category c ON m.category = c.id INNER JOIN pharmacy p ON m.pharmacy = p.id', (err, rows, fields) => {
+    if (!err) {
       res.render('shop/index', { title: 'my_pharmacy|home', result: rows });
       //res.send(rows);
     }
@@ -57,6 +71,11 @@ router.get('/product', function (req, res, next) {
 /* GET About page. */
 router.get('/about', function (req, res, next) {
   res.render('shop/about', { title: 'my_pharmacy|about us' });
+});
+
+/* GET Get Help page. */
+router.get('/how-to-buy', function (req, res, next) {
+  res.render('shop/help', { title: 'my_pharmacy| how to buy' });
 });
 
 /* GET Contact page. */
@@ -128,15 +147,14 @@ router.get('/contacts', ensureAuthenticated, (req, res, next) => {
 });
 
 router.get('/buyers', ensureAuthenticated, (req, res, next) => {
-  mysql.query("SELECT c.id, c.firstname, c.lastname, p.id, p.assurence, p.amounts, p.product, p.date "
-    + "FROM client c JOIN paiement p ON c.id = p.assurence", (err, rows, field) => {
-      if (!err) {
-        res.render('admin/buyer', { title: 'Admin', result: rows })
-      }
-      else {
-        res.send(err);
-      }
-    });
+  mysql.query("SELECT * FROM paiement", (err, rows, field) => {
+    if (!err) {
+      res.render('admin/buyer', { title: 'Admin', result: rows })
+    }
+    else {
+      res.send(err);
+    }
+  });
 });
 
 /* Paying page */
@@ -176,6 +194,9 @@ router.post("/charge", (req, res) => {
             res.send(err);
           }
         });
+        var sql1 = "INSERT INTO `paiement`(`names`, `email`,`amounts`) VALUES (?,?,?)";
+        var parms1 = [req.body.name, req.body.email, req.body.amount];
+        mysql.query(sql1, parms1);
       })
       .catch(err => console.log(err));
   } catch (err) {
@@ -236,9 +257,9 @@ router.post('/medecine', ensureAuthenticated, (req, res, next) => {
 
 /* GET home page One Item in modal. */
 router.post('/add-to-cart/:title', function (req, res, next) {
-  mysql.query("SELECT m.id_item, m.title, m.description, m.image, c.price as price FROM medicament m INNER JOIN category c ON m.category = c.id WHERE title = '" + req.params.title + "'", (err, rows, fields) => {
+  mysql.query("SELECT m.id_item, m.title, m.pharmacy, p.name as pharmacyname, p.address, m.description, m.image, c.price as price FROM medicament m INNER JOIN category c ON m.category = c.id INNER JOIN pharmacy p ON m.pharmacy = p.id WHERE title = '" + req.params.title + "'", (err, rows, fields) => {
     if (!err) {
-      res.render('shop/add-to-cart', { title: 'my_pharmacy|home', result: rows });
+      res.render('shop/add-to-cart', { title: 'add-cart|home', result: rows });
       //res.send(rows);
     }
     else {
@@ -278,15 +299,16 @@ router.post('/savemail', (req, res, err) => {
   localStorage.setItem('medicalmanagementEmail', req.body.email);
   console.log(localStorage.getItem('medicalmanagementEmail'));
 
-  res.redirect('/');
+  res.redirect('/product');
 });
 
 router.post('/checkout', (req, res, err) => {
-  var sql = "INSERT INTO facture (items, price, quantity, personemail) VALUES (?,?,?,?)";
-  var sql2 = "INSERT INTO alltransaction (items, price, quantity, personemail) VALUES (?,?,?,?)";
-  var parms = [req.body.cart_title, req.body.cart_price, req.body.cart_quantity, req.body.cart_email];
-  mysql.query(sql, parms);
-  mysql.query(sql2, parms);
+  var sql = "INSERT INTO facture (items, price, quantity, personemail, located) VALUES (?,?,?,?,?)";
+  var sql2 = "INSERT INTO alltransaction (items, price, quantity, personemail, located, pharmacy) VALUES (?,?,?,?,?,?)";
+  var parms1 = [req.body.cart_title, req.body.cart_price, req.body.cart_quantity, req.body.cart_email, req.body.cart_location];
+  var parms2 = [req.body.cart_title, req.body.cart_price, req.body.cart_quantity, req.body.cart_email, req.body.cart_location, req.body.cart_pharmacy];
+  mysql.query(sql, parms1);
+  mysql.query(sql2, parms2);
 
   res.redirect('/checkout');
 });

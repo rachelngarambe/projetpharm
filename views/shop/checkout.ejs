@@ -19,10 +19,11 @@
     <tr>
       <th scope="col">No</th>
       <th scope="col">Item</th>
-      <th scope="col">price</th>
+      <th scope="col">price (Frw)</th>
       <th scope="col">quantity/(pk)</th>
       <th scope="col">Total</th>
       <th scope="col">Your email</th>
+      <th scope="col">Location</th>
       <th scope="col">Date</th>
       <th scope="col">Remove</th>
     </tr>
@@ -45,6 +46,7 @@
       <td><%= item.quantity %></td>
       <td><%= total=item.price*item.quantity %> Rwf</td>
       <td><%= item.personemail %></td>
+      <td><%= item.located %></td>
       <td><%= item.date %></td>
       <td>
         <form action="/removing" method="POST">

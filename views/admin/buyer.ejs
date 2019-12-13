@@ -70,18 +70,21 @@
         <table class="table table-dark">
             <thead>
                 <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">PHARMANCE NAME</th>
-                    <th scope="col">LOCATION</th>
+                    <th scope="col">No</th>
+                    <th scope="col">Names</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Amounts</th>
+                    <th scope="col">Date</th>
                 </tr>
             </thead>
             <tbody>
+                <% var No = 0; %>
                 <% result.forEach((item) => { %>
                 <tr>
-                    <td><%= item.id %></td>
-                    <td><%= item.firstname %> <%= item.lastname %></td>
-                    <td><%= item.product %></td>
-                    <td><%= item.amount %></td>
+                    <td><%= No +=1 %></td>
+                    <td><%= item.names %></td>
+                    <td><%= item.email %></td>
+                    <td><%= item.amounts %></td>
                     <td><%= item.date %></td>
                 </tr>
                 <% }); %>

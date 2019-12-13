@@ -1,0 +1,82 @@
+<%- include('../layouts/header'); -%>
+<br>
+<div><br></div>
+<style>
+    .title {
+        text-align: center;
+        margin-left: 30%;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 24px;
+        color: #fff;
+
+    }
+</style>
+<div class="row">
+    <!-- <div class="jumbotron col-md-8 pt-2 py-2 my-1 m-auto">
+    </div> -->
+    <div class="col-md-8 col-sm-12"
+        style="height: 500px; background-color:#28a745; border: 1px solid rgb(203, 203, 226); border-radius: 5%;">
+        <!-- begin carousel-->
+
+        <header class=" my-4 slide">
+
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active">
+                    </li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active" style="width: 100%; height: 470px;border-radius: 3%">
+                        <span class="title"> We are here to serve you the medecine</span>
+                        <img src="images/slide2.jpg" width="100%" height="470px;border-radius: 3%" class="d-block w-100"
+                            alt="...">
+                    </div>
+                    <div class="carousel-item" style="width: 100%; height: 470px;">
+                        <span class="title"> Take medecine in our medical center</span>
+                        <img src="images/slide11.jpg" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item" style="width: 100%; height: 470px;border-radius: 3%">
+                        <span class="title"> We care about your health</span>
+                        <img src="images/slide22.jpg" width="100%" height="470px;border-radius: 3%"
+                            class="d-block w-100" alt="...">
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </header>
+        <!--end carousel -->
+    </div>
+
+    <div class="col-md-4 col-sm-12 mt-3">
+        <div class="card bg-dark text-white" style="width: 125%; margin-right: 0px;">
+            <img src="images/slide4.jpg" class="card-img" alt="...">
+            <div class="card-img-overlay">
+                <h5 class="card-title" style="font-size: 1.5em;">Medical store delivery management system:</h5>
+                <p class="card-text" style="font-size: 1.3em">help you get medicine through online, use your medical
+                    prescription and get medical at your chosen nearest pharmacy</p>
+                <button stype="button" style="margin-left:1%;" onclick="location.href='/how-to-buy';"
+                    class="btn btn-success">
+                    <h2>Get more information</h2>
+                </button>
+                <br>
+                <br>
+                <br>
+                <h4>If you have already know how to use it</h4>
+                <button stype="button" style="margin-left:1%;" onclick="location.href='/product';"
+                    class="btn btn-primary">
+                    <h2>Get started Here!</h2>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include('../layouts/footer'); -%>

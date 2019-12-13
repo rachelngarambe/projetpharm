@@ -1,16 +1,21 @@
-const stripe = Stripe('pk_test_tJApfkxoo1ZiU91Jqa5YZAQS0004iNbAIQ'); // Your Publishable Key
+var dotenv = require('dotenv');
+dotenv.config();
+const stripe = Stripe(process.env.PUBLIC_KEY); // Your Publishable Key
 const elements = stripe.elements();
 // Create our card inputs
 var style = {
   base: {
-    color: "#fff"
-  }
+    color: '#fff',
+  },
 };
 
-const card = elements.create('card', {
-  hidePostalCode: true
-},
-  { style });
+const card = elements.create(
+  'card',
+  {
+    hidePostalCode: true,
+  },
+  { style }
+);
 card.mount('#card-element');
 
 const form = document.querySelector('form');
@@ -25,7 +30,7 @@ const stripeTokenHandler = token => {
   form.appendChild(hiddenInput);
 
   form.submit();
-}
+};
 
 // Create token from card data
 form.addEventListener('submit', e => {
@@ -34,5 +39,5 @@ form.addEventListener('submit', e => {
   stripe.createToken(card).then(res => {
     if (res.error) errorEl.textContent = res.error.message;
     else stripeTokenHandler(res.token);
-  })
-})
+  });
+});
