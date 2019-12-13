@@ -59,6 +59,11 @@ router.get('/about', function (req, res, next) {
   res.render('shop/about', { title: 'my_pharmacy|about us' });
 });
 
+/* GET Get Help page. */
+router.get('/how-to-buy', function (req, res, next) {
+  res.render('shop/help', { title: 'my_pharmacy| how to buy' });
+});
+
 /* GET Contact page. */
 router.get('/contact', function (req, res, next) {
   res.render('shop/contact', { title: 'my_pharmacy|contact' });

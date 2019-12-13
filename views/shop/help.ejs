@@ -34,13 +34,13 @@
 					<li class="nav-item">
 						<a class="nav-link" href="/news"><i class="fas fa-newspaper"></i> News</a>
 					</li>
-					<li class="nav-item active">
-						<a class="nav-link active" href="/about"><i class="fas fa-address-card"></i> About</a>
+					<li class="nav-item">
+						<a class="nav-link" href="/about"><i class="fas fa-address-card"></i> About</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="/contact"><i class="fas fa-id-card-alt"></i> Contact</a>
 					</li>
-					<li class="nav-item">
+					<li class="nav-item active">
 						<a class="nav-link" href="/how-to-buy"><i class="fas fa-id-card-alt"></i> How to use</a>
 					</li>
 				</ul>
@@ -52,36 +52,58 @@
 		<%- include('../partials/messages.ejs'); -%>
 
 		<div class="jumbotron mt-5">
-			<h1 class="display-4">Who are we?</h1>
-			<p class="lead">We are your online pharmacy and we are here for to serve you because your health is our
-				preacupation</p>
+			<h1 class="display-4">How to buy?</h1>
+			<button type="button" class="btn btn-warning" data-toggle="modal">
+				Note:
+			</button>
+			<p class="lead">Do you need your medication fast? you can pay online using Visa Card or Master Card and pick up at
+				participanting
+				pharmacy</p>
 			<hr class="my-4">
-			<p class="text-content">
-				<h3>Rubavu District</h3>
-				<h3>Rubavu City</h3>
+		</div>
+		<div class="jumbotron mt-5">
+			<button type="button" class="btn btn-primary" data-toggle="modal">
+				First Step:
+			</button>
+			<p class="lead"> Have you been prescribed this medication?
+				You must have medical prescription from one health center or Hospital
 			</p>
-
-			<!--modal--->
-
-			<!-- Modal -->
-			<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
-				aria-hidden="true">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLongTitle">TWO WAY TO GET YOUR MEDICATION</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!----end modal----->
+		</div>
+		<div class="jumbotron mt-5">
+			<button type="button" class="btn btn-primary" data-toggle="modal">
+				Second Step:
+			</button>
+			<p class="lead">Enter you email and Continue</p>
+		</div>
+		<div class="jumbotron mt-5">
+			<button type="button" class="btn btn-primary" data-toggle="modal">
+				Third step:
+			</button>
+			<p class="lead">You can choose any medical you want according to your prescription</p>
+		</div>
+		<div class="jumbotron mt-5">
+			<button type="button" class="btn btn-primary" data-toggle="modal">
+				Fourth step:
+			</button>
+			<p class="lead">Add quantity and choose pharmacy according to your prescription</p>
+		</div>
+		<div class="jumbotron mt-5">
+			<button type="button" class="btn btn-primary" data-toggle="modal">
+				Fifth step:
+			</button>
+			<p class="lead">Click on checkout Now button to be ready to pay</p>
+		</div>
+		<div class="jumbotron mt-5">
+			<button type="button" class="btn btn-primary" data-toggle="modal">
+				Final step:
+			</button>
+			<p class="lead">
+				<ol>
+					<li>Fill the Form by add your names</li>
+					<li>Add credit card or Master card number</li>
+					<li>Click on Submit payment</li>
+				</ol>
+			</p>
 		</div>
 
 		<%- include('../layouts/footer'); -%>
